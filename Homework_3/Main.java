@@ -20,8 +20,8 @@ public class Main {
             System.err.println(p.getMessage());
         } catch (WrongDataException w) {
             System.err.println(w.getMessage());
-        } catch (NoSuchElementException io) {
-            System.err.println(io.getMessage());
+        } catch (NoSuchElementException | IllegalStateException sc) {
+            System.err.println("Scanner error.");
         }
     }
 }

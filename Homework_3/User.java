@@ -21,10 +21,7 @@ public class User {
     public static String[] getData(String data) throws ParseException{
         String[] parsed = data.split(" ");
         if (parsed.length != 6) throw new RequestExceptions.ParseException();
-        else {
-            for (String item: parsed) System.out.println(item);
-            return parsed;
-        }
+        else return parsed;
     }
 
     public User(String[] data) {
@@ -44,7 +41,8 @@ public class User {
                     System.getProperty("user.dir"),
                     File.separator,
                     this.userName.lastName);
-            else throw new RequestExceptions.WrongDataException();
+            else throw new RequestExceptions
+                .WrongDataException("Invalid sex format.");
         } catch (WrongDataException w) {
             throw w;
         }
@@ -79,10 +77,11 @@ public class User {
         }
 
         private void valid() throws WrongDataException{
-            if (!this.firstName.matches(regex)
+            if (!(this.firstName.matches(regex)
                 && this.lastName.matches(regex)
-                && this.surName.matches(regex))
-                    throw new RequestExceptions.WrongDataException();
+                && this.surName.matches(regex)))
+                    throw new RequestExceptions
+                        .WrongDataException("Invalid username format.");
         }
 
         public String toString() {
@@ -98,7 +97,8 @@ public class User {
      */
     public class BirthDay {
 
-        String regex = "^(0[1-9]|[12][0-9]|3[01]).(0[1-9]|1[012]).(19|20)\\d\\d$";
+        String regex = "^(0[1-9]|[12][0-9]|3[01])"
+            + ".(0[1-9]|1[012]).(19|20)\\d\\d$";
         private String date;
 
         private BirthDay(String date) {
@@ -107,7 +107,8 @@ public class User {
 
         private void valid() throws WrongDataException{
             if (!this.date.matches(regex))
-                throw new RequestExceptions.WrongDataException();
+                throw new RequestExceptions
+                    .WrongDataException("Invalid birthday format.");
         }
     }
 
@@ -122,7 +123,8 @@ public class User {
 
         private void  valid() throws WrongDataException{
             if (!number.matches(regex))
-                throw new RequestExceptions.WrongDataException();
+                throw new RequestExceptions
+                    .WrongDataException("Invalid phone format.");
         }
     }
 }

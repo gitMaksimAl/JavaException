@@ -11,15 +11,19 @@ public class RequestExceptions extends Throwable{
 
     public static class ParseException extends RequestExceptions{
         
+        public ParseException(String message) {
+            super(message);
+        }
+
         public ParseException() {
-            super("Wrong data amount.");
+            super("Wrong amount of data.");
         }
     }
 
     public static class WrongDataException extends RequestExceptions{
 
-        public WrongDataException() {
-            super("Wrong data format.");
+        public WrongDataException(String message) {
+            super(message);
         }
     }
 }
