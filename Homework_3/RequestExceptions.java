@@ -20,9 +20,9 @@ public class RequestExceptions extends Throwable{
         }
     }
 
-    public static class WrongDataException extends RequestExceptions{
+    public static class InvalidDataException extends RequestExceptions{
 
-        public WrongDataException(String message) {
+        public InvalidDataException(String message) {
             super(message);
         }
     }

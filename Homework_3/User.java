@@ -2,13 +2,16 @@ package Homework_3;
 
 import java.io.File;
 import Homework_3.RequestExceptions.ParseException;
-import Homework_3.RequestExceptions.WrongDataException;
+import Homework_3.RequestExceptions.InvalidDataException;
 
 /**
  * User.
  * Use static method 'createUser' for create new user from string with data.
  */
 public class User {
+
+    public static String DATA_FORMAT = "<Name> <Lastname> <Surname> "
+            + "<birthday(dd.mm.yyyy)> <phonenumber(11 digit)> <sex(m|f)>";
 
     private Name userName;
     private BirthDay bday;
@@ -31,7 +34,7 @@ public class User {
         this.sex = data[5].charAt(0);
     }
 
-    public void validate() throws WrongDataException{
+    public void validate() throws InvalidDataException{
         try {
             this.userName.valid();
             this.bday.valid();
@@ -42,8 +45,8 @@ public class User {
                     File.separator,
                     this.userName.lastName);
             else throw new RequestExceptions
-                .WrongDataException("Invalid sex format.");
-        } catch (WrongDataException w) {
+                .InvalidDataException("Invalid sex format.");
+        } catch (InvalidDataException w) {
             throw w;
         }
     }
@@ -76,12 +79,12 @@ public class User {
             this.surName = sname;
         }
 
-        private void valid() throws WrongDataException{
+        private void valid() throws InvalidDataException{
             if (!(this.firstName.matches(regex)
                 && this.lastName.matches(regex)
                 && this.surName.matches(regex)))
                     throw new RequestExceptions
-                        .WrongDataException("Invalid username format.");
+                        .InvalidDataException("Invalid username format.");
         }
 
         public String toString() {
@@ -98,17 +101,17 @@ public class User {
     public class BirthDay {
 
         String regex = "^(0[1-9]|[12][0-9]|3[01])"
-            + ".(0[1-9]|1[012]).(19|20)\\d\\d$";
+            + "\\.(0[1-9]|1[012])\\.(19|20)\\d\\d$";
         private String date;
 
         private BirthDay(String date) {
             this.date = date;
         }
 
-        private void valid() throws WrongDataException{
+        private void valid() throws InvalidDataException{
             if (!this.date.matches(regex))
                 throw new RequestExceptions
-                    .WrongDataException("Invalid birthday format.");
+                    .InvalidDataException("Invalid birthday format.");
         }
 
         public String toString() {
@@ -125,10 +128,10 @@ public class User {
             this.number = number;
         }
 
-        private void  valid() throws WrongDataException{
+        private void  valid() throws InvalidDataException{
             if (!number.matches(regex))
                 throw new RequestExceptions
-                    .WrongDataException("Invalid phone format.");
+                    .InvalidDataException("Invalid phone format.");
         }
 
         public String toString() {

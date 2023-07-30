@@ -8,13 +8,13 @@ import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 import Homework_3.RequestExceptions.ParseException;
-import Homework_3.RequestExceptions.WrongDataException;
+import Homework_3.RequestExceptions.InvalidDataException;
 
 public class Main {
     public static void main(String[] args) {
-        System.out.println("Please enter user data like: " +
-            "<Name> <Lastname> <Surname> <birthday(dd.mm.yyyy)> " +
-            "<phonenumber(11 digit)> <sex(m|f)>");
+        System.out.println("\033[H\033[2JPlease enter user data like: "
+            + User.DATA_FORMAT);
+
         try (Scanner scanner = new Scanner(System.in)){
             String[] userData = User.getData(scanner.nextLine());
             User userOne = new User(userData);
@@ -28,7 +28,7 @@ public class Main {
             writer.close();
         } catch (ParseException p) {
             System.err.println(p.getMessage());
-        } catch (WrongDataException w) {
+        } catch (InvalidDataException w) {
             System.err.println(w.getMessage());
         } catch (NoSuchElementException | IllegalStateException sc) {
             System.err.println("Scanner error.");
