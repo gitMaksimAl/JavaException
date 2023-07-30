@@ -14,7 +14,7 @@ public class User {
     private BirthDay bday;
     private PhoneNumber phone;
     private char sex;
-    private String file;
+    private String fileName;
 
     public User() {this.userName = null;}
 
@@ -37,7 +37,7 @@ public class User {
             this.bday.valid();
             this.phone.valid();
             if (this.sex == 'f' || this.sex == 'm')
-                this.file = String.format("%s%s%s", 
+                this.fileName = String.format("%s%s%s", 
                     System.getProperty("user.dir"),
                     File.separator,
                     this.userName.lastName);
@@ -48,8 +48,8 @@ public class User {
         }
     }
 
-    public String getFile() {
-        return file;
+    public String getFileName() {
+        return fileName;
     }
 
     @Override
@@ -110,6 +110,10 @@ public class User {
                 throw new RequestExceptions
                     .WrongDataException("Invalid birthday format.");
         }
+
+        public String toString() {
+            return this.date;
+        }
     }
 
     public class PhoneNumber {
@@ -125,6 +129,10 @@ public class User {
             if (!number.matches(regex))
                 throw new RequestExceptions
                     .WrongDataException("Invalid phone format.");
+        }
+
+        public String toString() {
+            return this.number;
         }
     }
 }
